@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: dev
+  freemarker:
+    cache: false
+    charset: utf-8
+    content-type: text/html
+    enabled: true
+    settings:
+      number_format: '0'
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
