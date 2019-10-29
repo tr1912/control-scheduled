@@ -8,6 +8,7 @@ public interface ScheduledConfigService {
 
     /**
      * 按照条件查询定时任务
+     *
      * @param param
      * @return
      */

@@ -10,6 +10,7 @@ public interface ScheduledConfigDao {
 
     /**
      * 按照条件查询定时list
+     *
      * @param param
      * @return
      */

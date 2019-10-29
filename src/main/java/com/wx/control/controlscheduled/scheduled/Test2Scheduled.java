@@ -15,7 +15,7 @@ public class Test2Scheduled implements Runnable {
     public void run() {
         logger.info("---------------测试定时2开始执行-------------------");
         logger.info("2");
-        logger.info((System.currentTimeMillis() - timestamp)+"ms");
+        logger.info((System.currentTimeMillis() - timestamp) + "ms");
         timestamp = System.currentTimeMillis();
         logger.info("---------------测试定时2结束执行-------------------");
     }
