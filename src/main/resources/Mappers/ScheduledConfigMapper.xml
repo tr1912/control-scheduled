@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wx.control.controlscheduled.dao.ScheduledConfigDao">
+    <resultMap id="BaseMap" type="com.wx.control.controlscheduled.po.ScheduledConfigPo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="class_reference" property="classReference" jdbcType="VARCHAR"/>
+        <result column="cron" property="cron" jdbcType="VARCHAR"/>
+        <result column="class_param" property="classParam" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="sys_number" property="sysNumber" jdbcType="INTEGER"/>
+        <result column="flag1" property="flag1" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="BaseColumn">
+        id,class_reference,cron,class_param,remark,state,sys_number,flag1
+    </sql>
+
+    <select id="findSheduled" resultMap="BaseMap">
+        select
+        <include refid="BaseColumn"/>
+        from
+        t_scheduled_config
+        <where>
+            <if test="state!=null">
+                AND state = #{state, jdbcType=INTEGER}
+            </if>
+            <if test="id!=null">
+                AND id = #{id, jdbcType=INTEGER}
+            </if>
+            <if test="sysNumber!=null">
+                AND sys_number = #{sysNumber, jdbcType=INTEGER}
+            </if>
+            <if test="classReference!=null and classReference!=''">
+                AND class_reference = #{classReference, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

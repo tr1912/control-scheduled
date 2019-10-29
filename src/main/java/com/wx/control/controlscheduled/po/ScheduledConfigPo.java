@@ -19,5 +19,5 @@ public class ScheduledConfigPo {
 
     private Integer sysNumber;
 
-    private String flag;
+    private String flag1;
 }

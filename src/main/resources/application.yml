@@ -15,3 +15,7 @@ spring:
       number_format: '0'
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  type-aliases-package: com.wx.control.controlscheduled.po
+  mapper-locations: classpath:/mappers/**Mapper.xml
