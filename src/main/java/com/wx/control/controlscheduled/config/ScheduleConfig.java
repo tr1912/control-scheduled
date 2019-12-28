@@ -4,6 +4,7 @@ import com.wx.control.controlscheduled.po.ScheduledConfigPo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -21,6 +22,9 @@ public class ScheduleConfig {
 
     @Autowired
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
 
     /**
@@ -56,7 +60,7 @@ public class ScheduleConfig {
                 //判断当前定时任务是否有效，COMMON_API_WRAPPER_STATIC_VALUE.VALIDFLAG.TRUE为有效标识
                 if (cron.getState().equals(1)) {
                     //开启一个新的任务，库中存储的是全类名（包名加类名）通过反射成java类，读取新的时间
-                    ScheduledFuture<?> future = threadPoolTaskScheduler.schedule((Runnable) Class.forName(cron.getClassReference()).newInstance(), new CronTrigger(cron.getCron()));
+                    ScheduledFuture<?> future = threadPoolTaskScheduler.schedule((Runnable) applicationContext.getBean(Class.forName(cron.getClassReference())), new CronTrigger(cron.getCron()));
                     //这一步非常重要，之前直接停用，只停用掉了最后启动的定时任务，前边启用的都没办法停止，所以把每次的对象存到map中可以根据key停用自己想要停用的
                     scheduleMap.put(cron.getClassReference(), future);
                 }
